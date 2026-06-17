@@ -60,7 +60,14 @@ with col1:
         # Calculate 3D Regression Plane using Ordinary Least Squares formula
         X_mat = np.vstack([np.ones(n_points), X1, X2]).T
         beta = np.linalg.lstsq(X_mat, Y, rcond=None)[0]
-        st.metric("Regression Equation", f"Price = {beta[0]:.2f} + {beta[1]:.4f}*(SqFt) + {beta[2]:.2f}*(Bedrooms)")
+        st.markdown(f"""
+        <div style="background-color: #f0f2f6; padding: 15px; border-radius: 10px; margin-top: 10px;">
+            <p style="margin: 0; font-size: 14px; color: #555; font-weight: bold;">Regression Equation</p>
+            <p style="margin: 0; font-size: 18px; font-weight: bold; color: #ff4b4b; word-wrap: break-word;">
+                Price = {b0:.2f} + {b1:.4f} × (SqFt)
+            </p>
+        </div>
+        """, unsafe_html=True)
 
 with col2:
     if dimension == "2D View (Ignore $X_2$)":
