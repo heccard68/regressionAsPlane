@@ -57,7 +57,7 @@ with col1:
                 {eq_text_2d}
             </p>
         </div>
-        """, unsafe_html=True)
+        """, unsafe_allow_html=True)
         
     else:
         st.success("""
@@ -82,7 +82,7 @@ with col1:
                 {eq_text_3d}
             </p>
         </div>
-        """, unsafe_html=True)
+        """, unsafe_allow_html=True)
 
 with col2:
     if dimension == "2D View (Ignore $X_2$)":
