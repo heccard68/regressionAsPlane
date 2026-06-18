@@ -46,7 +46,18 @@ with col1:
         
         # Calculate 2D Regression line
         b1, b0 = np.polyfit(X1, Y, 1)
-        st.metric("Regression Equation", f"Price = {b0:.2f} + {b1:.4f}*(SqFt)")
+        
+        # Pre-format the text equation to avoid f-string confusion
+        eq_text_2d = f"Price = {b0:.2f} + {b1:.4f} × (SqFt)"
+        
+        st.markdown(f"""
+        <div style="background-color: #f0f2f6; padding: 15px; border-radius: 10px; margin-top: 10px;">
+            <p style="margin: 0; font-size: 14px; color: #555; font-weight: bold;">Regression Equation</p>
+            <p style="margin: 0; font-size: 18px; font-weight: bold; color: #ff4b4b; word-wrap: break-word;">
+                {eq_text_2d}
+            </p>
+        </div>
+        """, unsafe_html=True)
         
     else:
         st.success("""
@@ -60,11 +71,15 @@ with col1:
         # Calculate 3D Regression Plane using Ordinary Least Squares formula
         X_mat = np.vstack([np.ones(n_points), X1, X2]).T
         beta = np.linalg.lstsq(X_mat, Y, rcond=None)[0]
+        
+        # Pre-format the text equation to avoid f-string confusion
+        eq_text_3d = f"Price = {beta[0]:.2f} + {beta[1]:.4f} × (SqFt) + {beta[2]:.2f} × (Bedrooms)"
+        
         st.markdown(f"""
         <div style="background-color: #f0f2f6; padding: 15px; border-radius: 10px; margin-top: 10px;">
             <p style="margin: 0; font-size: 14px; color: #555; font-weight: bold;">Regression Equation</p>
-            <p style="margin: 0; font-size: 18px; font-weight: bold; color: #ff4b4b; word-wrap: break-word;">
-                Price = {b0:.2f} + {b1:.4f} × (SqFt)
+            <p style="margin: 0; font-size: 16px; font-weight: bold; color: #28a745; word-wrap: break-word;">
+                {eq_text_3d}
             </p>
         </div>
         """, unsafe_html=True)
